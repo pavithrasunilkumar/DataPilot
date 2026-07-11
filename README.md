@@ -14,7 +14,7 @@ Ask your data a question, get an analyst-grade answer — powered by RAG, MCP, a
 
 ---
 
-## Overview
+# Overview
 
 DataPilot is a full-stack AI-driven analytics platform designed to replace the manual data-analyst workflow — clean, analyze, visualize, model, explain , with a single conversational interface. Instead of manually building charts in a BI tool, a user asks a question in plain English and receives an evidence-backed answer, grounded in real SQL execution and statistical testing, not a language model's guess.
 
@@ -22,7 +22,7 @@ The system combines a **React + TypeScript** frontend, a **FastAPI** backend, a 
 
 ---
 
-## Features
+# Features
 
 **For Business Users**
 - Ask a question in plain English and receive a SQL-backed answer, chart, and confidence-scored explanation
@@ -47,7 +47,7 @@ The system combines a **React + TypeScript** frontend, a **FastAPI** backend, a 
 
 ---
 
-## Demo Flow
+# Demo Flow
 
 **Business User**
 Register → Create Project → Upload Dataset → Data Quality Report → Auto Clean → Domain Detected & Dashboard Generated → Ask a Question → SQL + Chart + Explanation Returned → Generate Executive Report
@@ -57,7 +57,7 @@ Login → Open Query Panel → Review Generated SQL → Run Custom Queries → T
 
 ---
 
-## Architecture
+# Architecture
 
 ```
                             User
@@ -87,7 +87,7 @@ Frontend: `:3000` · Backend: `:8000` · Redis (Celery broker): `:6379`
 
 ---
 
-## Tech Stack
+# Tech Stack
 
 ### Application Engineering
 
@@ -139,7 +139,7 @@ Every tool listed above is available on a permanent free tier or is open-source 
 
 ---
 
-## Engineering Challenges & How They Were Solved
+# Engineering Challenges & How They Were Solved
 
 **Bottleneck: LLMs cannot be trusted to compute numbers correctly.**
 Language models are prone to arithmetic and logical errors when asked to reason directly about numeric data. This was solved by strictly separating responsibilities: the LLM only translates a natural-language question into a SQL query and later translates a result set into an explanation. All computation — aggregation, correlation, and significance testing — is executed by DuckDB and SciPy. The LLM never performs arithmetic itself.
@@ -161,7 +161,7 @@ Loading full datasets into memory for every query does not scale. This was solve
 
 ---
 
-## Getting Started
+# Getting Started
 
 ### Prerequisites
 
@@ -209,7 +209,7 @@ docker-compose up --build
 
 ---
 
-## API Reference
+# API Reference
 
 ### Auth
 
@@ -257,7 +257,7 @@ docker-compose up --build
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 datapilot/
@@ -291,7 +291,7 @@ datapilot/
 
 ---
 
-## Security
+# Security
 
 - Passwords hashed with bcrypt
 - JWT-based session authentication
@@ -301,7 +301,7 @@ datapilot/
 
 ---
 
-## Roadmap
+# Roadmap
 
 - [x] Data ingestion and profiling
 - [x] Automated cleaning
@@ -318,13 +318,25 @@ datapilot/
 
 ---
 
-## Author
+# 👩‍💻 Author
 
-**Your Name**
-LinkedIn: `https://linkedin.com/in/your-handle`
-GitHub: `https://github.com/your-username`
-Portfolio: `https://your-portfolio-link`
+## Pavithra Sunilkumar
 
-## License
+- LinkedIn: https://linkedin.com/in/pavithra-sunilkumar68
+- GitHub: https://github.com/pavithrasunilkumar
+- Portfolio: https://vermillion-panda-a08876.netlify.app/
 
-MIT
+---
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+---
+## 📝 License
+
+copyright attached
+
+---
