@@ -1,220 +1,285 @@
-# DataPilot — The AI Analyst for Every Business
+<div align="center">
 
-🌐 Live Deployment — *Add your deployed link here*
+# DataPilot
 
-![Status](https://img.shields.io/badge/status-active-brightgreen) ![Version](https://img.shields.io/badge/version-0.1.0-blue) ![React](https://img.shields.io/badge/React-18-61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6) ![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688) ![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-purple) ![RAG](https://img.shields.io/badge/RAG-Chroma-orange) ![MCP](https://img.shields.io/badge/MCP-Tool%20Protocol-black) ![License](https://img.shields.io/badge/license-MIT-lightgrey)
+### The AI Analyst for Every Business
 
-Ask your data a question, get an analyst-grade answer · RAG + MCP + LangGraph agent · $0 free-tier stack
+Ask your data a question, get an analyst-grade answer — powered by RAG, MCP, and a LangGraph agent
 
-[Features](#-features) · [Demo Flow](#-demo-flow) · [Architecture](#️-architecture) · [Tech Stack](#️-tech-stack) · [Getting Started](#-getting-started) · [API Reference](#-api-reference)
+![Status](https://img.shields.io/badge/status-active-brightgreen) ![Version](https://img.shields.io/badge/version-0.1.0-blue) ![License](https://img.shields.io/badge/license-MIT-lightgrey) ![React](https://img.shields.io/badge/React-18-61DAFB) ![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688) ![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-purple)
 
----
+[Live Demo](#) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Architecture](#architecture) &nbsp;·&nbsp; [Tech Stack](#tech-stack) &nbsp;·&nbsp; [Engineering Challenges](#engineering-challenges--how-they-were-solved) &nbsp;·&nbsp; [Getting Started](#getting-started) &nbsp;·&nbsp; [API Reference](#api-reference)
 
-DataPilot is a full-stack AI-driven analytics platform designed to replace the manual data-analyst workflow — clean, analyze, visualize, model, explain — with a single conversational interface. Instead of dragging chart widgets around a BI dashboard, a user simply asks a question in plain English and gets back an evidence-backed answer.
-
-The system integrates a **React + TypeScript** frontend, a **FastAPI** backend, a **DuckDB/Pandas** analytics engine, and a **LangGraph-orchestrated AI agent** that combines **RAG** (for business-specific context) and an **MCP tool layer** (for standardized, auditable tool-calling) to turn natural-language questions into real SQL queries, statistical tests, and plain-English explanations — not guesses.
-
-Every LLM/embedding/vector-store component runs on a permanent free tier or fully open-source/self-hosted, so the entire project costs $0 to build and demo.
+</div>
 
 ---
 
-## ✨ Features
+## Overview
 
-### For Business Users
-- **Ask-a-Question AI Analyst** — type "why did revenue drop this quarter?" and get a real SQL-backed answer, chart, and confidence-scored explanation
-- **Auto Data Quality Report** — upload a CSV/Excel/JSON and instantly see missing values, duplicates, outliers, and a quality score
-- **One-Click Auto Clean** — automated imputation, duplicate removal, and outlier handling, or switch to manual control per column
-- **Domain-Aware Dashboards** — DataPilot detects whether your data is Finance, Retail, Healthcare, etc. and auto-builds the relevant KPI dashboard
-- **Forecasting & Prediction** — churn prediction, demand forecasting, anomaly detection, with SHAP-based explanations of *why* the model predicted what it did
-- **Executive Reports** — one click generates a downloadable PDF/PPT summary with insights, risks, and recommendations
+DataPilot is a full-stack AI-driven analytics platform designed to replace the manual data-analyst workflow — clean, analyze, visualize, model, explain — with a single conversational interface. Instead of manually building charts in a BI tool, a user asks a question in plain English and receives an evidence-backed answer, grounded in real SQL execution and statistical testing, not a language model's guess.
 
-### Platform / Engineering
-- **RAG Context Layer** — retrieves schema meaning, business glossary, and past findings so answers reflect *your* data's definitions, not generic ones
-- **MCP Tool Server** — `run_sql`, `train_model`, `generate_chart`, `send_report` exposed as standard MCP tools, callable from any MCP-compatible client
-- **LangGraph Agent Orchestration** — the question → SQL → stats → explanation flow runs as a branching, stateful graph with retries and ML-vs-SQL routing
-- **JWT Authentication** — secure login, role-based access
-- **Background Jobs** — Celery + Redis handle cleaning/training without blocking the API
-- **Fully Free Stack** — Groq (or local Ollama), Chroma, sentence-transformers, Supabase — no paid API required anywhere
+The system combines a **React + TypeScript** frontend, a **FastAPI** backend, a **DuckDB/Pandas** analytics engine, and a **LangGraph-orchestrated agent** that uses **RAG** for business-specific context and an **MCP tool layer** for standardized, auditable tool-calling. Every AI/ML component in the stack runs on a free tier or is fully open-source and self-hosted.
 
 ---
 
-## 🎬 Demo Flow
+## Features
+
+**For Business Users**
+- Ask a question in plain English and receive a SQL-backed answer, chart, and confidence-scored explanation
+- Automatic data quality report on upload — missing values, duplicates, outliers, quality score
+- One-click automated cleaning, or manual control per column
+- Domain-aware dashboards — the platform detects whether data is Finance, Retail, Healthcare, etc. and adjusts KPIs accordingly
+- Forecasting, churn prediction, and anomaly detection with SHAP-based explainability
+- One-click executive PDF/PPT report generation
+
+**For Analysts**
+- Full visibility into every AI-generated SQL query, plus a manual query editor against the same dataset
+- Cohort, RFM segmentation, funnel, and hypothesis-testing modules
+- Statistically grounded answers — comparisons are backed by real significance tests, not model intuition
+- Exportable, audit-ready analysis with documented assumptions
+
+**Platform**
+- RAG context layer — retrieves schema meaning, business glossary, and prior findings so answers reflect the specific dataset, not generic definitions
+- MCP tool server — core capabilities exposed as standard, callable tools for any MCP-compatible client
+- LangGraph agent orchestration — branching, stateful pipeline with retries and ML-vs-SQL routing
+- JWT authentication, role-based access, background job processing via Celery/Redis
+- Entirely free-tier stack — no paid API required to build or run
+
+---
+
+## Demo Flow
 
 **Business User**
-Register → Create Project → Upload Dataset (or connect DB) → Auto Data Quality Report → Auto Clean → Domain Detected + Dashboard Generated → Ask "why did revenue drop?" → SQL + Chart + Explanation returned → Generate Executive Report (PDF)
+Register → Create Project → Upload Dataset → Data Quality Report → Auto Clean → Domain Detected & Dashboard Generated → Ask a Question → SQL + Chart + Explanation Returned → Generate Executive Report
 
-**Analyst / Power User**
-Login → Open Query Panel → View AI-generated SQL → Edit/run custom SQL against same DuckDB table → Train a churn model → View SHAP explanation → Schedule KPI monitoring alert
-
----
-
-## 🏗️ Architecture
-
-```
-                        User
-                          │
-                          ▼
-                React + TypeScript (Vite)
-                          │
-                          ▼
-                   FastAPI Backend
-                          │
-        ┌─────────────────┼──────────────────┐
-        ▼                 ▼                  ▼
-   Data Engine        AI Engine           ML Engine
- (Pandas, DuckDB,   (Groq/Ollama LLM,   (Scikit-learn,
-  profiling &        LangGraph graph,    XGBoost, Prophet,
-  cleaning)          Chroma RAG,         SHAP explainability)
-                      MCP tool server)
-        └─────────────────┼──────────────────┘
-                          ▼
-              Dashboards, Reports & Alerts
-                          │
-                          ▼
-                PostgreSQL (Supabase) + Redis/Celery
-```
-`:3000` frontend · `:8000` FastAPI backend · `:6379` Redis (Celery broker)
+**Analyst**
+Login → Open Query Panel → Review Generated SQL → Run Custom Queries → Train a Model → Review SHAP Explanation → Schedule KPI Monitoring Alert
 
 ---
 
-## 🛠️ Tech Stack
+## Architecture
+
+```
+                            User
+                              │
+                              ▼
+                    React + TypeScript (Vite)
+                              │
+                              ▼
+                       FastAPI Backend
+                              │
+        ┌─────────────────────┼──────────────────────┐
+        ▼                     ▼                      ▼
+   Data Engine             AI Engine              ML Engine
+ (Pandas, DuckDB,     (Groq / Ollama LLM,     (Scikit-learn,
+  profiling,           LangGraph graph,        XGBoost, Prophet,
+  cleaning)            Chroma RAG,             SHAP)
+                        MCP tool server)
+        └─────────────────────┼──────────────────────┘
+                              ▼
+                Dashboards, Reports & Alerts
+                              │
+                              ▼
+             PostgreSQL (Supabase) + Redis / Celery
+```
+
+Frontend: `:3000` · Backend: `:8000` · Redis (Celery broker): `:6379`
+
+---
+
+## Tech Stack
+
+### Application Engineering
 
 | Layer | Technology | Purpose |
 |---|---|---|
-| Frontend | React 18 + TypeScript | UI framework |
-| Styling | Tailwind CSS | Utility-first CSS |
-| Charts | Recharts / Plotly.js | Interactive dashboards |
+| Frontend | React 18, TypeScript, Vite | UI framework and build tooling |
+| Styling | Tailwind CSS | Utility-first styling |
+| Charts | Recharts, Plotly.js | Interactive dashboards |
 | Backend | FastAPI (Python) | REST API server |
-| Background Jobs | Celery + Redis | Async cleaning/training |
+| Background Jobs | Celery, Redis | Asynchronous cleaning and training |
 | Database | PostgreSQL (Supabase free tier) | Persistence |
-| Data Engine | Pandas, Polars, NumPy, SciPy | Cleaning & stats |
-| Query Engine | DuckDB | SQL execution over uploaded data |
-| ML | Scikit-learn, XGBoost, LightGBM, Prophet, SHAP | Prediction & explainability |
-| LLM | Groq API (Llama 3.3) / Ollama (local fallback) | NL → SQL, explanations |
-| Embeddings | sentence-transformers (`all-MiniLM-L6-v2`) | Local, free RAG embeddings |
-| Vector Store | Chroma | Schema docs, glossary, past insights |
-| Orchestration | LangChain / LangGraph | Stateful agent graph |
-| Tool Protocol | MCP (Model Context Protocol) | Standardized tool-calling |
-| Auth | JWT + bcrypt | Secure authentication |
-| Deployment | Docker, GitHub Actions, Render/Hugging Face Spaces, Vercel | CI/CD & hosting |
+| Auth | JWT, bcrypt | Authentication and session management |
+| Deployment | Docker, GitHub Actions, Render / Hugging Face Spaces, Vercel | CI/CD and hosting |
 
-Every tool above has a permanent free tier or is fully open-source and self-hostable — **$0/month to build and demo.**
+### Data Analysis & Statistics
+
+| Area | Technology / Method | Purpose |
+|---|---|---|
+| Querying | SQL (via DuckDB), Pandas | Data extraction and transformation |
+| Descriptive Statistics | NumPy, SciPy | Central tendency, dispersion, distributions |
+| Inferential Statistics | t-test, chi-square, ANOVA (SciPy) | Testing whether a pattern is statistically significant |
+| Correlation Analysis | Pearson, Spearman | Relationship strength between variables |
+| Segmentation | RFM analysis, cohort analysis | Customer value tiers, retention behavior |
+| Funnel Analysis | Custom aggregation pipelines | Conversion drop-off by stage |
+| Experimentation | A/B test analysis with power analysis and confidence intervals | Validating business experiments |
+| Data Visualization | Plotly, Matplotlib, Seaborn | Static and interactive chart generation |
+| Reporting | Excel/CSV export, PDF and PPTX generation | Business-ready deliverables |
+| BI Interoperability | CSV/JSON export compatible with Power BI and Tableau | Downstream reporting flexibility |
+
+### Machine Learning
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Modeling | Scikit-learn, XGBoost, LightGBM | Regression, classification, clustering |
+| Time Series | Prophet, statsmodels | Forecasting |
+| Explainability | SHAP | Feature-level prediction explanation |
+
+### GenAI / Agent Layer
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| LLM | Groq API (Llama 3.3), Ollama (local fallback) | Natural language to SQL, explanation generation |
+| Embeddings | sentence-transformers (`all-MiniLM-L6-v2`) | Local, free embedding generation |
+| Vector Store | Chroma | Schema documentation, glossary, and prior insight retrieval |
+| Orchestration | LangChain, LangGraph | Stateful, branching agent execution |
+| Tool Protocol | Model Context Protocol (MCP) | Standardized, auditable tool-calling interface |
+
+Every tool listed above is available on a permanent free tier or is open-source and self-hostable. The project has no required paid dependency.
 
 ---
 
-## 🚀 Getting Started
+## Engineering Challenges & How They Were Solved
+
+**Bottleneck: LLMs cannot be trusted to compute numbers correctly.**
+Language models are prone to arithmetic and logical errors when asked to reason directly about numeric data. This was solved by strictly separating responsibilities: the LLM only translates a natural-language question into a SQL query and later translates a result set into an explanation. All computation — aggregation, correlation, and significance testing — is executed by DuckDB and SciPy. The LLM never performs arithmetic itself.
+
+**Bottleneck: Generic LLM answers ignore business-specific definitions.**
+A term like "churn" or "active customer" means something different for every business, and a base LLM has no way to know the local definition. This was solved with a RAG layer: schema documentation, a business glossary, and prior findings are embedded locally and retrieved as context before every query generation step, so answers stay grounded in the specific dataset.
+
+**Bottleneck: A single linear pipeline cannot handle varied question types or failures.**
+A fixed sequence (question → SQL → explanation) breaks when a query returns empty results, or when the question actually requires a forecast rather than a lookup. This was solved by rebuilding the pipeline as a LangGraph state graph with conditional edges: failed or empty queries trigger a bounded retry with a reformulated query, and questions implying prediction are routed to the ML module instead of the SQL path.
+
+**Bottleneck: Ad hoc function-calling does not scale or generalize.**
+Wiring each capability (`run_sql`, `train_model`, `generate_chart`) directly into the agent's prompt logic makes the system brittle and unusable outside the app itself. This was solved by exposing these capabilities as MCP tools, giving the platform a standardized interface that any MCP-compatible client can call.
+
+**Bottleneck: Auto-cleaning without judgment can silently corrupt data.**
+Blindly imputing or dropping data can remove signal or introduce bias, particularly when missingness is high or non-random. This was solved by setting explicit thresholds: columns with high missingness are flagged for user review rather than auto-imputed, and outliers are capped rather than deleted to avoid discarding legitimate variation.
+
+**Bottleneck: Large or high-cardinality datasets slow down interactive analysis.**
+Loading full datasets into memory for every query does not scale. This was solved by using DuckDB as the query engine, which executes SQL directly against on-disk or in-memory columnar data without requiring the full dataset to be duplicated into Pandas for every operation.
+
+---
+
+## Getting Started
 
 ### Prerequisites
+
 | Tool | Version | Check |
 |---|---|---|
 | Node.js | 18+ | `node -v` |
 | Python | 3.11+ | `python --version` |
 | Docker | latest | `docker -v` |
-| Groq API key (free) *or* Ollama installed locally | — | [console.groq.com](https://console.groq.com) |
+| Groq API key (free), or Ollama installed locally | — | console.groq.com |
 
 ### Installation
 
-Clone the repository
 ```bash
 git clone https://github.com/<your-username>/datapilot.git
 cd datapilot
 ```
 
-**Terminal 1 — Backend**
+**Backend**
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate       # Windows: venv\Scripts\activate
+source venv/bin/activate        # Windows: venv\Scripts\activate
 
 pip install -r requirements.txt
 cp .env.example .env
-# Add GROQ_API_KEY, or set LLM_PROVIDER=ollama for fully local/offline
+# Set GROQ_API_KEY, or LLM_PROVIDER=ollama for a fully local setup
 
 uvicorn app.main:app --reload
-# ✅ Running on http://localhost:8000
+# Running on http://localhost:8000
 ```
 
-**Terminal 2 — Frontend**
+**Frontend**
 ```bash
 cd frontend
 npm install
 cp .env.example .env
 npm run dev
-# ✅ Running on http://localhost:3000
+# Running on http://localhost:3000
 ```
 
-**Or, everything at once with Docker**
+**Or, with Docker**
 ```bash
 docker-compose up --build
 ```
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 ### Auth
+
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/register` | Register a new user |
-| POST | `/login` | Login → returns JWT |
+| POST | `/login` | Login, returns a JWT |
 
 ### Data
+
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
-| POST | `/datasets/upload` | ✅ | Upload CSV/XLSX/JSON |
-| GET | `/datasets/:id/quality-report` | ✅ | Data profiling & quality score |
-| POST | `/datasets/:id/clean` | ✅ | Run auto/manual cleaning |
+| POST | `/datasets/upload` | Yes | Upload CSV, XLSX, or JSON |
+| GET | `/datasets/:id/quality-report` | Yes | Data profiling and quality score |
+| POST | `/datasets/:id/clean` | Yes | Run automated or manual cleaning |
 
 ### AI Analyst
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| POST | `/analyst/ask` | ✅ | `{question}` → `{sql, chart_config, explanation, confidence}` |
-| GET | `/analyst/history/:datasetId` | ✅ | Past questions & insights (RAG memory) |
 
-### ML
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
-| POST | `/ml/train` | ✅ | `{target_column, model_type}` → trains + evaluates model |
-| GET | `/ml/:modelId/explain` | ✅ | SHAP feature importance |
+| POST | `/analyst/ask` | Yes | Question in, returns SQL, chart config, explanation, and confidence |
+| GET | `/analyst/history/:datasetId` | Yes | Prior questions and insights (RAG memory) |
+
+### Machine Learning
+
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/ml/train` | Yes | Trains and evaluates a model for a given target column |
+| GET | `/ml/:modelId/explain` | Yes | SHAP feature importance |
 
 ### Reports
+
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
-| POST | `/reports/generate` | ✅ | Generates downloadable PDF/PPTX executive report |
+| POST | `/reports/generate` | Yes | Generates a downloadable PDF or PPTX report |
 
 ### MCP Tools
+
 | Tool | Description |
 |---|---|
 | `run_sql` | Executes a read-only DuckDB query against the active dataset |
-| `train_model` | Trains a model and returns metrics + SHAP summary |
-| `generate_chart` | Returns a chart config for a given result set |
-| `send_report` | Sends a generated report to Slack/email |
+| `train_model` | Trains a model and returns metrics and a SHAP summary |
+| `generate_chart` | Returns a chart configuration for a given result set |
+| `send_report` | Sends a generated report to Slack or email |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 datapilot/
-├── frontend/                     # React + Vite app
+├── frontend/
 │   ├── src/
-│   │   ├── pages/                # Upload, Ask, Dashboard, Reports
-│   │   ├── components/           # ChartCard, QueryPanel, KpiCard
-│   │   └── api/
+│   │   ├── pages/            Upload, Ask, Dashboard, Reports
+│   │   ├── components/       ChartCard, QueryPanel, KpiCard
+│   │   └── api/               API client
 │   ├── .env.example
 │   └── package.json
 │
-├── backend/                      # FastAPI app
+├── backend/
 │   ├── app/
-│   │   ├── api/                  # route definitions
-│   │   ├── data/                 # ingestion, profiling, cleaning
-│   │   ├── analytics/            # descriptive/diagnostic engine
-│   │   ├── rag/                  # embeddings + Chroma retrieval
-│   │   ├── ai_analyst/           # NL -> SQL -> stats -> explanation
-│   │   ├── mcp_server/           # MCP tool definitions
-│   │   ├── ml/                   # training, selection, SHAP
-│   │   ├── graph/                # LangGraph state graph
-│   │   └── reports/              # PDF/PPT generation
+│   │   ├── api/                Route definitions
+│   │   ├── data/               Ingestion, profiling, cleaning
+│   │   ├── analytics/          Descriptive and diagnostic engine
+│   │   ├── rag/                 Embeddings and Chroma retrieval
+│   │   ├── ai_analyst/         NL-to-SQL-to-explanation pipeline
+│   │   ├── mcp_server/         MCP tool definitions
+│   │   ├── ml/                  Model training, selection, SHAP
+│   │   ├── graph/               LangGraph state graph
+│   │   └── reports/            PDF and PPTX generation
 │   ├── tests/
 │   ├── .env.example
 │   └── requirements.txt
@@ -226,65 +291,40 @@ datapilot/
 
 ---
 
-## 🤖 How the AI Analyst Scores an Answer
-
-1. Question is embedded and matched against schema docs, business glossary, and past insights (RAG)
-2. LLM generates a DuckDB SQL query using the retrieved context + schema
-3. Query executes read-only, with row limits and a timeout
-4. If two groups are being compared, a real `scipy.stats` test runs — the LLM never eyeballs significance
-5. A second LLM call turns the question + SQL + result + stat test into a plain-English explanation
-6. Chart type is picked by rule (time column → line, category compare → bar, two numeric → scatter), not guessed by the LLM
-
-```python
-# Example
-question = "Why did revenue decrease in March?"
-# → SQL: SELECT month, SUM(revenue) FROM sales GROUP BY month ORDER BY month
-# → stat test: t-test comparing March vs Feb, p=0.03 (significant)
-# → explanation: "Revenue dropped 12% (~$48K) in March, driven mainly by
-#    a 30% decline in repeat purchases from the mid-tier segment..."
-```
-If the LLM is unreachable, the pipeline falls back to the raw SQL result with a basic templated summary — no answer ever depends solely on model availability.
-
----
-
-## 🔒 Security
+## Security
 
 - Passwords hashed with bcrypt
-- JWT tokens for session auth
+- JWT-based session authentication
 - All protected routes require `Authorization: Bearer <token>`
-- SQL execution sandboxed to read-only, with row-limit and timeout guards
+- SQL execution sandboxed to read-only, with row limits and query timeouts
 - CORS restricted to known frontend origins
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
-- [x] Data ingestion & profiling
+- [x] Data ingestion and profiling
 - [x] Automated cleaning
-- [x] Analytics engine (descriptive/diagnostic)
+- [x] Analytics engine — descriptive and diagnostic
 - [x] RAG context retrieval
-- [x] AI Analyst (NL → SQL → explanation)
+- [x] AI Analyst — natural language to SQL to explanation
 - [x] MCP tool server
 - [x] LangGraph orchestration
-- [x] ML module (classification, forecasting, SHAP)
+- [x] ML module — classification, forecasting, SHAP
 - [x] Dashboard builder
 - [x] Automated report generation
-- [ ] Monitoring & anomaly alerts
-- [ ] Multi-agent specialization (v3+)
+- [ ] Monitoring and anomaly alerts
+- [ ] Multi-agent specialization (v3)
 
 ---
 
-## 👩‍💻 Author
+## Author
 
 **Your Name**
 LinkedIn: `https://linkedin.com/in/your-handle`
 GitHub: `https://github.com/your-username`
 Portfolio: `https://your-portfolio-link`
 
-## ⭐ Support
-
-If you found this project useful, consider giving it a ⭐ on GitHub.
-
-## 📝 License
+## License
 
 MIT
