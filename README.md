@@ -16,7 +16,7 @@ Ask your data a question, get an analyst-grade answer — powered by RAG, MCP, a
 
 ## Overview
 
-DataPilot is a full-stack AI-driven analytics platform designed to replace the manual data-analyst workflow — clean, analyze, visualize, model, explain — with a single conversational interface. Instead of manually building charts in a BI tool, a user asks a question in plain English and receives an evidence-backed answer, grounded in real SQL execution and statistical testing, not a language model's guess.
+DataPilot is a full-stack AI-driven analytics platform designed to replace the manual data-analyst workflow — clean, analyze, visualize, model, explain , with a single conversational interface. Instead of manually building charts in a BI tool, a user asks a question in plain English and receives an evidence-backed answer, grounded in real SQL execution and statistical testing, not a language model's guess.
 
 The system combines a **React + TypeScript** frontend, a **FastAPI** backend, a **DuckDB/Pandas** analytics engine, and a **LangGraph-orchestrated agent** that uses **RAG** for business-specific context and an **MCP tool layer** for standardized, auditable tool-calling. Every AI/ML component in the stack runs on a free tier or is fully open-source and self-hosted.
 
@@ -26,7 +26,7 @@ The system combines a **React + TypeScript** frontend, a **FastAPI** backend, a 
 
 **For Business Users**
 - Ask a question in plain English and receive a SQL-backed answer, chart, and confidence-scored explanation
-- Automatic data quality report on upload — missing values, duplicates, outliers, quality score
+- Automatic data quality report on upload ,  missing values, duplicates, outliers, quality score
 - One-click automated cleaning, or manual control per column
 - Domain-aware dashboards — the platform detects whether data is Finance, Retail, Healthcare, etc. and adjusts KPIs accordingly
 - Forecasting, churn prediction, and anomaly detection with SHAP-based explainability
@@ -35,7 +35,7 @@ The system combines a **React + TypeScript** frontend, a **FastAPI** backend, a 
 **For Analysts**
 - Full visibility into every AI-generated SQL query, plus a manual query editor against the same dataset
 - Cohort, RFM segmentation, funnel, and hypothesis-testing modules
-- Statistically grounded answers — comparisons are backed by real significance tests, not model intuition
+- Statistically grounded answers , comparisons are backed by real significance tests, not model intuition
 - Exportable, audit-ready analysis with documented assumptions
 
 **Platform**
