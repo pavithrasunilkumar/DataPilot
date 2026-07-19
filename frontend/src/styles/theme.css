@@ -1,0 +1,130 @@
+:root {
+  --color-void: #0a0c0f;
+  --color-panel: #14171c;
+  --color-panel-raised: #1b1f26;
+  --color-hairline: #262b33;
+  --color-text: #e9edf1;
+  --color-muted: #7c8794;
+  --color-amber: #f0a94e;
+  --color-teal: #45c6b8;
+  --color-rose: #e2617a;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+input,
+textarea,
+button {
+  font-family: var(--font-body);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+}
+
+.bezel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-hairline);
+  border-radius: 6px;
+  position: relative;
+}
+
+.bezel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: var(--color-amber);
+  opacity: 0.7;
+}
+
+.btn {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 5px;
+  border: 1px solid var(--color-hairline);
+  background: transparent;
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  border-color: var(--color-amber);
+  background: var(--color-amber);
+  color: #0a0c0f;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  background: var(--color-void);
+  border: 1px solid var(--color-hairline);
+  border-radius: 5px;
+  color: var(--color-text);
+  font-size: 13px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--color-amber);
+}
+
+.readout-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 4px;
+}

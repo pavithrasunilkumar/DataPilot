@@ -1,0 +1,39 @@
+# Render Blueprint — deploys the FastAPI backend + a free Postgres instance.
+# Push this repo to GitHub, then in Render: New -> Blueprint -> select this repo.
+# Render will read this file and provision both services automatically.
+
+services:
+  - type: web
+    name: datapilot-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: datapilot-db
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_EXPIRE_MINUTES
+        value: "10080"
+      - key: LLM_PROVIDER
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false # set this manually in the Render dashboard after deploy
+      - key: EMBEDDING_BACKEND
+        value: hashing
+      - key: ALLOWED_ORIGINS
+        sync: false # set to your deployed Vercel URL, e.g. https://your-app.vercel.app
+      - key: UPLOAD_DIR
+        value: ./uploaded_files
+      - key: MAX_UPLOAD_MB
+        value: "25"
+
+databases:
+  - name: datapilot-db
+    plan: free

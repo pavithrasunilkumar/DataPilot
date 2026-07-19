@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Databases
+*.db
+
+# Uploaded files
+uploaded_files/
+
+# Vector store
+chroma_store/
+test_chroma_store/
+
+# Node
+node_modules/
+dist/
+.env.local
+
+# OS
+.DS_Store
