@@ -8,6 +8,7 @@ services:
       POSTGRES_USER: datapilot
       POSTGRES_PASSWORD: datapilot
       POSTGRES_DB: datapilot
+      
     ports:
       - "5432:5432"
     volumes:
